@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import UserLogin from './components/Userlogin';
+import Usersignup from './components/User_signup';
+import {Route, Routes } from 'react-router-dom';
+import Chart from './components/Chart';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    
+      <Routes>
+        <Route path="/User-signup" element={<Usersignup />} />
+        <Route path="/userlogin" element={<UserLogin />} />
+        <Route path="/" element={<Chart />} />
+
+
+      </Routes>
   );
 }
 
