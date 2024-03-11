@@ -51,25 +51,34 @@ const UserLogin = () => {
       .catch((err) => console.error('API Error:', err));
   }, []);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     validateEmail();
     validateMobile();
     validatePassword();
 
-    const matchUser = login.find(
-      (data) => data.email === email && data.mobile === mobile && data.password === password
-    );
+    if (!emailError && !mobileError && !passwordError) {
+      try {
+        const response = await axios.post('http://127.0.0.1:8000/auth/jwt/create', {
+          username: email, // Assuming email is used as the username
+          password,
+        });
 
-    if (matchUser) {
-      if (email === '' || mobile === '' || password === '') {
-        alert('Please fill all the details');
-        window.location.reload();
-      } else {
+        // Assuming the backend returns a token on successful authentication
+        console.log('Authentication successful! Token:', response.data.access);
+        localStorage.clear();
+        localStorage.setItem('access_token', response.data.access);
+        localStorage.setItem('refresh_token', response.data.refresh);
+        axios.defaults.headers.common['Authorization'] = 
+                                        `Bearer ${response.data['access']}`;
+
+        // Show an alert for demonstration purposes
         alert('Login successful');
-        navigate(`/dashboard/${matchUser._id}`);
+      } catch (error) {
+        console.error('Authentication error:', error);
+
+        // Show an alert for demonstration purposes
+        alert('Authentication failed');
       }
-    } else {
-      alert('Please enter correct data');
     }
   };
 

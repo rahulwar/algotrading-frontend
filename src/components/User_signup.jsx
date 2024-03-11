@@ -71,14 +71,23 @@ const UserSignup = () => {
     setPasswordError("");
 
     try {
-        axios.post('http://localhost:1000/Usersignup',{fullName,contactNumber,email,password,gender })
-        .then(res=> {
-          navigate('/');
-        })
-        .catch(err => console.log(err));
-        
+      const response = await axios.post('http://127.0.0.1:8000/auth/users/', {
+        username: email, // Assuming email is used as the username
+        email,
+        mobile_no: contactNumber,
+        password,
+        gender,
+        first_name: fullName.split(" ")[0],
+        last_name: fullName.split(" ")[1] || "",
+      });
+
+      // Assuming the backend returns user data in the response
+      console.log('User created:', response.data);
+
+      // Redirect or handle success as needed
+      navigate('/');
     } catch (error) {
-        console.error('Error signing up:', error);
+      console.error('Error signing up:', error);
     }
 
     
