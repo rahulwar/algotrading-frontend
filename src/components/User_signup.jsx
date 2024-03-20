@@ -130,11 +130,11 @@ const UserSignup = () => {
 
                         <div className="form-outline mb-2 ">
                           <input onChange={e => setGender(e.target.value)} className="ml-5" type="checkbox" id="male" name="gender" value="male"/>
-                          <label for="male">Male</label>
+                          <label htmlFor="male">Male</label>
                           <input onChange={e => setGender(e.target.value)} className="ml-5" type="checkbox" id="female" name="gender" value="female"/>
-                          <label for="female">Female</label>
+                          <label htmlFor="female">Female</label>
                           <input onChange={e => setGender(e.target.value)} className="ml-5" type="checkbox" id="other" name="gender" value="other"/>
-                          <label for="other">Other</label>
+                          <label htmlFor="other">Other</label>
                        </div>
 
                       <div className="form-outline mb-2">
